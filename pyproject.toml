@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "commit-assistant"
-version = "1.0.0"
+version = "1.1.0"
 authors = [
     { name = "Xu Jiaqi", email = "jiaqixu12138@gmail.com" }
 ]
@@ -25,6 +25,13 @@ classifiers = [
 requires-python = ">=3.8"
 dependencies = [
     "click>=8.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "ruff>=0.6",
 ]
 
 [project.urls]
@@ -34,3 +41,17 @@ Issues = "https://github.com/Master-626/commit-assistant/issues"
 
 [project.scripts]
 commit-assist = "commit_assistant.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["commit_assistant*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.ruff]
+target-version = "py38"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP"]
