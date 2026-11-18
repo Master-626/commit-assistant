@@ -162,7 +162,7 @@ pytest
 ruff check .
 ```
 
-GitHub Actions (`.github/workflows/ci.yml`) runs Ruff and pytest on Python 3.8, 3.9, 3.10, 3.11, and 3.12.
+GitHub Actions (`.github/workflows/ci.yml`) runs Ruff and pytest on Python 3.8 and 3.9 on `ubuntu-22.04`, and on Python 3.10, 3.11, and 3.12 on `ubuntu-latest`.
 
 ## License
 
