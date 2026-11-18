@@ -13,8 +13,19 @@ runner = CliRunner()
 
 
 def _text(result) -> str:
-    """Stdout plus stderr, across Click versions that split the streams."""
-    return (result.output or "") + (getattr(result, "stderr", None) or "")
+    """Stdout plus stderr.
+
+    Click 8.1 mixes stderr into stdout and raises if ``result.stderr`` is read.
+    Click 8.2 and newer capture stderr separately.
+    """
+    output = result.output or ""
+    try:
+        stderr = result.stderr or ""
+    except (AttributeError, ValueError):
+        stderr = ""
+    if not stderr or stderr in output:
+        return output
+    return output + stderr
 
 
 def _commit_file(repo: Path, relative: str, content: str, message: str = "wip") -> None:
